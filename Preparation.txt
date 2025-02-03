@@ -1,0 +1,185 @@
+Code Info :-
+
+Use AES(Advance Encryption Standard) Algorith for Encrypt and Decrypt password field
+AES resides in javax.crypto package
+
+===========================================================================================
+
+
+Table Name and Column and DDL Query:-           (pr means primary key)
+============================================================================================
+
+1)  Sanket_I1433_IssuedBook
+---------------------------------------------------------------
+issue_id int pr
+student_id int
+book_id int
+issue_date date
+due_date date
+status varchar(Issued/Return)
+
+---------------------------------------------------------------
+
+Table Defination :-
+CREATE TABLE Sanket_I1433_IssuedBook
+(
+	issue_id int IDENTITY(1,1) NOT NULL,
+	student_id int NOT NULL,
+	book_id int NOT NULL,
+	issue_date date NOT NULL,
+	due_date date NOT NULL,
+	status varchar(20) COLLATE SQL_Latin1_General_CP1_CI_AS DEFAULT 'Issued' NULL,
+	CONSTRAINT PK__Sanket_I__D6185C39F0F5BB25 PRIMARY KEY (issue_id)
+);
+
+============================================================================================
+
+2)  Sanket_I1433_ReturnBook
+---------------------------------------------------------------
+
+return_id int pr
+issue_id int
+return_date date
+fine_amount float
+
+---------------------------------------------------------------
+
+Table Defination :-
+CREATE TABLE Sanket_I1433_ReturnBook
+(
+	return_id int IDENTITY(1,1) NOT NULL,
+	issue_id int NOT NULL,
+	return_date date NOT NULL,
+	fine_amount decimal(10,2) DEFAULT 0.00 NULL,
+	CONSTRAINT PK__Sanket_I__35C2347353E4E054 PRIMARY KEY (return_id)
+);
+
+ALTER TABLE Sanket_I1433_ReturnBook
+ADD
+ CONSTRAINT FK__Sanket_I1__issue__4F12BBB9 FOREIGN KEY (issue_id)
+ REFERENCES
+ Sanket_I1433_IssuedBook(issue_id);
+
+
+============================================================================================
+3)  Sanket_I1433_Book
+---------------------------------------------------------------
+
+id int pr
+isbn int unique
+bname varcharno
+author varchar
+no_of_page int
+btype varchar
+book_quantity int
+
+---------------------------------------------------------------
+
+Table Defination :-
+CREATE TABLE Sanket_I1433_Book
+(
+	id int IDENTITY(1,1) NOT NULL,
+	ISBN int NOT NULL,
+	bname varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	author varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	no_of_page int NULL,
+	btype varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	book_quantity int DEFAULT 0 NULL,
+	CONSTRAINT PK__Sanket_I__3213E83F51C9D7F0 PRIMARY KEY (id),
+	CONSTRAINT UQ_isbn UNIQUE (ISBN)
+);
+
+============================================================================================
+
+4)  Sanket_I1433_Admin
+---------------------------------------------------------------
+
+id int pr
+a_userId varchar
+a_pass varchar
+a_cpass varchar
+
+---------------------------------------------------------------
+
+Table Defination :-
+
+CREATE TABLE Sanket_I1433_Admin
+(
+	id int IDENTITY(1,1) NOT NULL,
+	a_userId varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	a_pass varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	a_cpass varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	CONSTRAINT PK__Sanket_I__3213E83FC5BD857D PRIMARY KEY (id)
+);
+
+============================================================================================
+
+5)  Sanket_I1433_Student
+---------------------------------------------------------------
+
+id int pr
+userid varchar
+password varchar
+confirmpass varchar
+created_time date
+
+---------------------------------------------------------------
+
+Table Defination :-
+
+CREATE TABLE sanket_I1433_Student
+(
+	id int IDENTITY(0,1) NOT NULL,
+	userId varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	password varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	confirmpass varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	Created_time datetime2(0) NULL
+);
+
+============================================================================================
+
+6)  Sanket_I1433_Userdata
+---------------------------------------------------------------
+
+id int pr
+fname varchar
+lname varchar
+email email
+mobile long
+adhar long
+iserId varchar
+
+---------------------------------------------------------------
+
+Table Defination :-
+
+CREATE TABLE sanket_I1433_UserData
+(
+	id int IDENTITY(1,1) NOT NULL,
+	fname varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	lname varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	email varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	mobile varchar(10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	adhar varchar(12) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	userId varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	CONSTRAINT PK__sanket_I__3213E83F3BD9C98B PRIMARY KEY (id)
+);
+
+============================================================================================
+
+7) Sanket_I1433_DeletedUser
+
+---------------------------------------------------------------
+
+deleteId int fk
+fname varchar
+lname varchar
+email email
+mobile long
+adhar long
+iserId varchar
+
+---------------------------------------------------------------
+
+Table Defination :-
+
