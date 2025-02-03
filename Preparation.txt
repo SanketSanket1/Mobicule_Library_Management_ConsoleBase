@@ -183,3 +183,12 @@ iserId varchar
 
 Table Defination :-
 
+CREATE TABLE Sanket_I1433_DeletedUser (
+	delete_id int IDENTITY(1,1) NOT NULL,
+	fname varchar(100) ,
+	lname varchar(100),
+	email varchar(100),
+	mobile varchar(30),
+	adhar varchar(12),
+	userId varchar(100)
+);
